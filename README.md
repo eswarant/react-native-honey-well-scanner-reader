@@ -1,0 +1,1 @@
+# react-native-honey-well-scanner-reader
