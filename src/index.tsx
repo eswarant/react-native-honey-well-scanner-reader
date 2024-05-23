@@ -20,3 +20,15 @@ const HoneyWellScannerReader = NativeModules.HoneyWellScannerReader
 export function multiply(a: number, b: number): Promise<number> {
   return HoneyWellScannerReader.multiply(a, b);
 }
+
+export function initAPI(): Promise<string> {
+  return HoneyWellScannerReader.initAPI();
+}
+
+export function activateReader(onReadCallback: (barcodeText: string) => void) {
+  return HoneyWellScannerReader.activateReader(onReadCallback);
+}
+
+export function deactivateReader(): void {
+  return HoneyWellScannerReader.deactivateReader();
+}

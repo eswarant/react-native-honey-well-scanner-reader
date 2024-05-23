@@ -11,11 +11,10 @@ npm install react-native-honey-well-scanner-reader
 ## Usage
 
 ```js
-import { multiply } from 'react-native-honey-well-scanner-reader';
+import { initAPI, activateReader, deactivateReader } from 'react-native-honey-well-scanner-reader';
 
 // ...
 
-const result = await multiply(3, 7);
 ```
 
 ## Contributing
