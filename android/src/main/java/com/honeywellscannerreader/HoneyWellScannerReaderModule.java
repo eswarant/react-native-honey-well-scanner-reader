@@ -42,9 +42,10 @@ public class HoneyWellScannerReaderModule extends ReactContextBaseJavaModule
   public void initAPI(Promise promise) {
     printDebugLog("initAPI - Start");
     try {
-      init();
+      AidcManager.create(getCurrentActivity(), HoneyWellScannerReaderModule.this);
       promise.resolve("Initialized");
     } catch (RuntimeException ex) {
+      printDebugLog("error in initAPI");
       printDebugLog(ex.getMessage());
       promise.reject("Error in init", ex);
     }
@@ -82,10 +83,6 @@ public class HoneyWellScannerReaderModule extends ReactContextBaseJavaModule
     printDebugLog("deactivateReader - End");
   }
 
-  private void init() {
-    AidcManager.create(getCurrentActivity(), this);
-  }
-
   @Override
   public void onCreated(AidcManager aidcManager) {
     printDebugLog("onCreated - Start");
@@ -114,7 +111,7 @@ public class HoneyWellScannerReaderModule extends ReactContextBaseJavaModule
       e.printStackTrace();
     }
     // register bar code event listener
-    barcodeReader.addBarcodeListener(this);
+    barcodeReader.addBarcodeListener(HoneyWellScannerReaderModule.this);
     printDebugLog("onCreated - End");
   }
 

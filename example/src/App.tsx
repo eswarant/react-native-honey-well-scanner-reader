@@ -10,8 +10,12 @@ export default function App() {
   const [barcodeText, setBarcodeText] = React.useState('');
 
   const initBarcodeReader = async () => {
-    const initResult = await initAPI();
-    console.log('initResult', initResult);
+    try {
+      const initResult = await initAPI();
+      console.log('initResult', initResult);
+    } catch (ex) {
+      console.log(ex);
+    }
   };
 
   React.useEffect(() => {

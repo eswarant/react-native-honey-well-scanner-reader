@@ -1,6 +1,6 @@
 {
   "name": "react-native-honey-well-scanner-reader",
-  "version": "0.1.0",
+  "version": "0.1.7",
   "description": "Read barcode",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
