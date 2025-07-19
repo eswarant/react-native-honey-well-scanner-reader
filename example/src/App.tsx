@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, Alert } from 'react-native';
 import {
   initAPI,
   activateReader,
@@ -14,6 +14,9 @@ export default function App() {
       const initResult = await initAPI();
       console.log('initResult', initResult);
     } catch (ex) {
+      Alert.alert('Error', 'Error while initialization. ' + ex, undefined, {
+        cancelable: true,
+      });
       console.log(ex);
     }
   };
