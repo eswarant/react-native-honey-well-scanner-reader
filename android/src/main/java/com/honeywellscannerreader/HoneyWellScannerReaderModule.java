@@ -2,6 +2,10 @@ package com.honeywellscannerreader;
 
 import androidx.annotation.NonNull;
 import android.util.Log;
+import android.os.Build;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
 
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
@@ -42,12 +46,18 @@ public class HoneyWellScannerReaderModule extends ReactContextBaseJavaModule
   public void initAPI(Promise promise) {
     printDebugLog("initAPI - Start");
     try {
+      scannerServiceAvailable();
       AidcManager.create(getCurrentActivity(), HoneyWellScannerReaderModule.this);
       promise.resolve("Initialized");
-    } catch (RuntimeException ex) {
-      printDebugLog("error in initAPI");
+    } catch (PackageManager.NameNotFoundException ex) {
+      printDebugLog("error in initAPI PackageManager.NameNotFoundException");
       printDebugLog(ex.getMessage());
-      promise.reject("Error in init", ex);
+      promise.reject("Error in initAPI", "Honeywell scanner service not available", ex);
+    }
+    catch (RuntimeException ex) {
+      printDebugLog("error in initAPI RuntimeException");
+      printDebugLog(ex.getMessage());
+      promise.reject("Error in initAPI", ex);
     }
     printDebugLog("initAPI - End");
   }
@@ -210,6 +220,15 @@ public class HoneyWellScannerReaderModule extends ReactContextBaseJavaModule
 
   private void printDebugLog(String text) {
     Log.d(this.getClass().getSimpleName(), text);
+  }
+
+  private void scannerServiceAvailable () throws PackageManager.NameNotFoundException {
+    PackageManager pm = getReactApplicationContext().getPackageManager();
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+    pm.getPackageInfo("com.honeywell.barcode", PackageManager.PackageInfoFlags.of(0));
+    } else {
+    pm.getPackageInfo("com.honeywell.barcode", 0);
+    }
   }
 
 }
