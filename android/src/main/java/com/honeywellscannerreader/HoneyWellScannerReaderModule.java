@@ -46,15 +46,9 @@ public class HoneyWellScannerReaderModule extends ReactContextBaseJavaModule
   public void initAPI(Promise promise) {
     printDebugLog("initAPI - Start");
     try {
-      scannerServiceAvailable();
       AidcManager.create(getCurrentActivity(), HoneyWellScannerReaderModule.this);
       promise.resolve("Initialized");
-    } catch (PackageManager.NameNotFoundException ex) {
-      printDebugLog("error in initAPI PackageManager.NameNotFoundException");
-      printDebugLog(ex.getMessage());
-      promise.reject("Error in initAPI", "Honeywell scanner service not available", ex);
-    }
-    catch (RuntimeException ex) {
+    } catch (RuntimeException ex) {
       printDebugLog("error in initAPI RuntimeException");
       printDebugLog(ex.getMessage());
       promise.reject("Error in initAPI", ex);
