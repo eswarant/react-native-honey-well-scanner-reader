@@ -32,3 +32,7 @@ export function activateReader(onReadCallback: (barcodeText: string) => void) {
 export function deactivateReader(): void {
   return HoneyWellScannerReader.deactivateReader();
 }
+
+export function setReadCallBack(onReadCallback: (barcodeText: string) => void) {
+  return HoneyWellScannerReader.setReadCallBack(onReadCallback);
+}

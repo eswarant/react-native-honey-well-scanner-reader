@@ -21,4 +21,9 @@ class HoneyWellScannerReader: NSObject {
     reject("Not supported for IOS")
   }
 
+  @objc(setReadCallBack:withB:withResolver:withRejecter:)
+  func setReadCallBack(reject:RCTPromiseRejectBlock) -> Void {
+    reject("Not supported for IOS")
+  }
+
 }

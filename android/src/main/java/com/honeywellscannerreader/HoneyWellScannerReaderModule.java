@@ -93,6 +93,13 @@ public class HoneyWellScannerReaderModule extends ReactContextBaseJavaModule
     printDebugLog("deactivateReader - End");
   }
 
+  @ReactMethod
+  public void setReadCallBack(Callback readCallBack) {
+    printDebugLog("setReadCallBack - Start");
+    onReadCallback = readCallBack;
+    printDebugLog("setReadCallBack - end");
+  }
+
   @Override
   public void onCreated(AidcManager aidcManager) {
     printDebugLog("onCreated - Start");
@@ -213,7 +220,12 @@ public class HoneyWellScannerReaderModule extends ReactContextBaseJavaModule
 
     String barcodeData = event.getBarcodeData();
     printDebugLog("onBarcodeEvent - barcodeData: " + barcodeData);
+    if(onReadCallback != null){
     onReadCallback.invoke(barcodeData);
+    }
+    else{
+      printDebugLog("onBarcodeEvent - onReadCallback is null");
+    }
 
     printDebugLog("onBarcodeEvent - end");
   }
