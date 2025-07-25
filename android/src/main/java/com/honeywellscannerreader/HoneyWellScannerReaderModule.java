@@ -227,14 +227,4 @@ public class HoneyWellScannerReaderModule extends ReactContextBaseJavaModule
   private void printDebugLog(String text) {
     Log.d(this.getClass().getSimpleName(), text);
   }
-
-  private void scannerServiceAvailable () throws PackageManager.NameNotFoundException {
-    PackageManager pm = getReactApplicationContext().getPackageManager();
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-    pm.getPackageInfo("com.honeywell.barcode", PackageManager.PackageInfoFlags.of(0));
-    } else {
-    pm.getPackageInfo("com.honeywell.barcode", 0);
-    }
-  }
-
 }
